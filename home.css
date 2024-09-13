@@ -1,23 +1,86 @@
-.login-button{
-    background-color: blue;
+.navbar {
+    background-color: #fff;
+    height: 80px;
+    margin: 20px;
+    border-radius: 16px;
+    padding: 0.5rem;
+    
+}
+
+
+
+
+
+.login-button {
+    background-color: #5297ff;
     color: white;
     font-size: 14px;
     padding: 8px 20px;
     border-radius: 50px;
     text-decoration: none;
-    transition: 0.3s background-color; 
+    transition: 0.3s background-color;
 }
 
-.login-button:hover{
-    background-color:black;
+.login-button:hover {
+    background-color: black;
 }
 
-.navbar-toggler{
+.navbar-toggler {
     border: none;
     font-size: 1.25rem;
 
 }
-.navbar-toggler:focus .bnt-closer :focus{
+
+.navbar-toggler:focus .bnt-closer:focus {
     box-shadow: none;
     outline: none;
+}
+
+.nav-link {
+    color: #666777;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: black;
+}
+
+@media (min-width:991px) {
+    .nav-link::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%);
+        width: 0;
+        height: 2px;
+        background-color: #5297ff;
+        visibility: hidden;
+        transition: 0.3s ease-in-out;
+    }
+
+    .nav-link:hover::before,
+    .nav-link.active::before {
+        width: 100%;
+        visibility: visible;
+    }
+}
+
+.hero-section,
+.hero-section-img {
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+.hero-section::before {
+    background-color: rgba(0, 0, 0, 0.4);
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
