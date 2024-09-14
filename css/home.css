@@ -1,10 +1,60 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+}
+
+/* CSS Base */
 .navbar {
-    background-color: #fff;
-    height: 80px;
-    margin: 20px;
-    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 0.5rem;
+    background-color: #fff;
+    border-radius: 16px;
+    height: 150px;
+    margin: 20px;
     
+
+    
+}
+.navbar-brand{
+    margin-top: -20px;
+    align-items: center;
+    justify-content: space-between;
+
+
+}
+
+.navbar-brand img {
+    max-width: 230px;  /* Tamanho máximo da imagem em telas grandes */
+    width: 100%;  /* Ajusta a largura da imagem conforme o contêiner */
+    height: auto;  /* Mantém a proporção da imagem */
+    
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 991px) {
+    .navbar {
+        flex-direction: column;  /* Coloca os itens em coluna em telas menores */
+        align-items: center;  /* Centraliza os itens */
+    }
+
+    .navbar-brand {
+        margin-bottom: 10px;  /* Espaçamento entre a logo e os links */
+    }
+
+    .navbar-brand img {
+        max-width: 150px;  /* Tamanho máximo da imagem em telas menores */
+        padding-top: 15px;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;  /* Coloca os links em coluna */
+        align-items: center;  /* Centraliza os links */
+    }
 }
 
 
