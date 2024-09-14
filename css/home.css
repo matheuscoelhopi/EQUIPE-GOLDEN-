@@ -13,7 +13,7 @@
     padding: 0.5rem;
     background-color: #fff;
     border-radius: 16px;
-    height: 150px;
+    height: 100px;
     margin: 20px;
     
 
@@ -39,15 +39,27 @@
     .navbar {
         flex-direction: column;  /* Coloca os itens em coluna em telas menores */
         align-items: center;  /* Centraliza os itens */
+        justify-content: space-between;
     }
+    .container-fluid{
+        align-items: center;
+        justify-content:center;
+        margin-top: -30px;
+        
 
+    }
     .navbar-brand {
         margin-bottom: 10px;  /* Espaçamento entre a logo e os links */
+        align-items: center;
+        flex-direction: column;
+        
+        
     }
 
     .navbar-brand img {
         max-width: 150px;  /* Tamanho máximo da imagem em telas menores */
-        padding-top: 15px;
+        margin-top: 15px;
+        
     }
 
     .navbar-nav {
