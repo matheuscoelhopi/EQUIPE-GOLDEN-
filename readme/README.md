@@ -16,7 +16,7 @@ A Biblioteca Comunitária é uma aplicação web mobile projetada para facilitar
 
 - **Front-end:** HTML, CSS, JavaScript
 - **Back-end:** [ Node.js]
-- **Banco de Dados:** [Postgres]
+- **Banco de Dados:** [sql]
 - **Frameworks:** [ React, Bootstrap, Node.js]
 
 ## Instalação
