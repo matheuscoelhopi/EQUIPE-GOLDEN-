@@ -2,10 +2,10 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* CSS Base */
+/* #### NAV BAR #### */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -15,11 +15,12 @@
     border-radius: 16px;
     height: 100px;
     margin: 20px;
-    
 
-    
+
+
 }
-.navbar-brand{
+
+.navbar-brand {
     margin-top: -20px;
     align-items: center;
     justify-content: space-between;
@@ -28,44 +29,55 @@
 }
 
 .navbar-brand img {
-    max-width: 230px;  /* Tamanho máximo da imagem em telas grandes */
-    width: 100%;  /* Ajusta a largura da imagem conforme o contêiner */
-    height: auto;  /* Mantém a proporção da imagem */
-    
+    max-width: 230px;
+    /* Tamanho máximo da imagem em telas grandes */
+    width: 100%;
+    /* Ajusta a largura da imagem conforme o contêiner */
+    height: auto;
+    /* Mantém a proporção da imagem */
+
 }
 
 /* Responsividade para telas menores */
 @media (max-width: 991px) {
     .navbar {
-        flex-direction: column;  /* Coloca os itens em coluna em telas menores */
-        align-items: center;  /* Centraliza os itens */
+        flex-direction: column;
+        /* Coloca os itens em coluna em telas menores */
+        align-items: center;
+        /* Centraliza os itens */
         justify-content: space-between;
     }
-    .container-fluid{
+
+    .container-fluid {
         align-items: center;
-        justify-content:center;
+        justify-content: center;
         margin-top: -30px;
-        
+
 
     }
+
     .navbar-brand {
-        margin-bottom: 10px;  /* Espaçamento entre a logo e os links */
+        margin-bottom: 10px;
+        /* Espaçamento entre a logo e os links */
         align-items: center;
         flex-direction: column;
-        
-        
+
+
     }
 
     .navbar-brand img {
-        max-width: 150px;  /* Tamanho máximo da imagem em telas menores */
+        max-width: 150px;
+        /* Tamanho máximo da imagem em telas menores */
         margin-top: 15px;
-        
+
     }
 
     .navbar-nav {
         display: flex;
-        flex-direction: column;  /* Coloca os links em coluna */
-        align-items: center;  /* Centraliza os links */
+        flex-direction: column;
+        /* Coloca os links em coluna */
+        align-items: center;
+        /* Centraliza os links */
     }
 }
 
@@ -145,4 +157,91 @@
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 1;
+    /* Z-index menor que o conteúdo */
+} 
+
+
+/* ##### SEARCH BOX HOME ######### */
+
+.box {
+    width: 80%; 
+    max-width: 500px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-top: -30%;
+    top: 50px; 
+    z-index: 2;
+    padding: 10px;
+    justify-content: center;
 }
+
+/* Ajustando o texto dentro da .box */
+.box h3 {
+    position: absolute;
+    top: 50%; 
+    font-size: 2rem; 
+    color: white;
+    text-align: center;
+    transform: translateY(-50%); 
+}
+
+/* Ícones dentro da .box */
+.box > i {
+    font-size: 1.25rem; 
+    color: white;
+    margin: 10px;
+}
+
+/* Input dentro da .box */
+.box > input {
+    flex: 1;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 1rem; 
+    border-radius: 30px;
+    padding: 15px;
+    width: 100%; 
+}
+
+/* Media query para telas menores */
+@media (max-width: 768px) {
+    .box {
+        width: 90%; 
+        margin-top: -100%; 
+    }
+
+    .box h3 {
+        font-size: 1.5rem; 
+    }
+
+    .box > i {
+        font-size: 1rem; 
+    }
+
+    .box > input {
+        height: 35px; 
+        font-size: 0.9rem; 
+        padding: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .box {
+        width: 100%; 
+    }
+
+    .box h3 {
+        font-size: 1.25rem; 
+    }
+
+    .box > input {
+        height: 30px; 
+        font-size: 0.8rem; 
+    }
+}
+
+
+/* ##### FIM SEARCH BOX HOME ######### */
