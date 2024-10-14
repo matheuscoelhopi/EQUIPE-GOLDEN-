@@ -72,6 +72,7 @@ img {
     width: 100%;
 }
 
+
 .input-box header {
     font-weight: 700;
     text-align: center;
@@ -93,7 +94,7 @@ img {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     outline: none;
     margin-bottom: 20px;
-    color: #40414a;
+    color: #444447;
 }
 
 .input-box .input-field label {
@@ -130,7 +131,7 @@ img {
 }
 
 .submit:hover {
-    background: rgba(37, 95, 156, 0.937);
+    background: #5297ff;
     color: #fff;
 }
 
@@ -158,10 +159,12 @@ span a:hover {
     }
 
     img {
-        width: 35px;
+        width: auto;
         position: absolute;
-        top: 20px;
-        left: 47%;
+        margin-top: -125px;
+        justify-content: center;
+        margin-left: -35px;
+        
     }
 
     .text {
