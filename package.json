@@ -3,16 +3,21 @@
   "version": "1.0.0",
   "description": "A Biblioteca Comunitária é uma aplicação web mobile projetada para facilitar a troca de livros entre usuários. Permite que usuários cadastrados postem livros para troca, visualizem detalhes dos livros, e entrem em contato com outros usuários. A aplicação possui um mecanismo de busca para facilitar a localização de livros e um sistema de autenticação com diferentes níveis de acesso.",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "node --watch --no-warnings scr/server.js"
+    "dev": "node --watch --no-warnings scr/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
     "fastify": "^5.0.0",
+    "fastify-multipart": "^5.3.1",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.0",
     "postgres": "^3.4.4"
   }
 }
