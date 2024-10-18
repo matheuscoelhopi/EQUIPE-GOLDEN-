@@ -1,50 +1,64 @@
-// Importações e configuração
-const fastify = require('fastify')({ logger: true });
-require('dotenv').config(); // Carregar variáveis de ambiente do arquivo .env
-const pool = require('./config/database'); // Pool de conexão do banco de dados
-const verifyJWT = require('./middlewares/verifyJWT'); // Middleware de autenticação JWT
+import Fastify from 'fastify'; // Framework de servidor
+import dotenv from 'dotenv'; // Carregar variáveis de ambiente
+import fastifyJwt from 'fastify-jwt'; // Plugin para autenticação JWT
+import fastifyMultipart from 'fastify-multipart'; // Plugin para upload de arquivos (se necessário)
+import authController from './scr/controllers/authController.js'; // Controlador de autenticação
+import bookController from './scr/controllers/bookController.js'; // Controlador de livros
+import userController from './scr/controllers/userController.js'; // Controlador de usuários (adicionado)
+import verifyJWT from './scr/middlewares/verifyJWT.js'; // Middleware para proteger rotas
+import pool from './scr/database.js'; // Configuração do banco de dados PostgreSQL
 
-// Registrar controladores de rotas
-const authController = require('./controllers/authController');
-const bookController = require('./controllers/bookController');
-const exchangeController = require('./controllers/exchangeController');
+dotenv.config(); // Carrega as variáveis de ambiente do arquivo .env
 
-// Rotas de autenticação
-fastify.post('/register', authController.register);
-fastify.post('/login', authController.login);
-fastify.get('/me', { preHandler: [verifyJWT] }, authController.me);
+// Inicializar o servidor Fastify
+const fastify = Fastify({ logger: true });
 
-// Rotas de livros
-fastify.post('/books', { preHandler: [verifyJWT] }, bookController.donateBook);
-fastify.put('/books/:id', { preHandler: [verifyJWT] }, bookController.updateBook);
-fastify.delete('/books/:id', { preHandler: [verifyJWT] }, bookController.deleteBook);
-fastify.get('/books/search', bookController.searchBooks);
+// Registrar o plugin de multipart (se estiver lidando com upload de imagens de livros)
+fastify.register(fastifyMultipart);
 
-// Rotas de trocas
-fastify.post('/exchange/:bookId/propose', { preHandler: [verifyJWT] }, exchangeController.proposeExchange);
-fastify.delete('/exchange/:id/cancel', { preHandler: [verifyJWT] }, exchangeController.cancelExchange);
-fastify.post('/exchange/:id/accept', { preHandler: [verifyJWT] }, exchangeController.acceptExchange);
-fastify.post('/exchange/:id/reject', { preHandler: [verifyJWT] }, exchangeController.rejectExchange);
+// Registrar o plugin JWT para autenticação
+fastify.register(fastifyJwt, {
+  secret: process.env.JWT_SECRET, // A chave secreta usada para assinar tokens JWT
+});
 
-// Testar conexão ao banco de dados
-fastify.get('/db-check', async (request, reply) => {
+// Conectar ao banco de dados antes de iniciar o servidor
+fastify.addHook('onReady', async () => {
   try {
-    const result = await pool.query('SELECT NOW()'); // Query de teste
-    reply.send({ message: 'Database connected', time: result.rows[0].now });
-  } catch (err) {
-    reply.status(500).send({ error: 'Failed to connect to the database.' });
+    await pool.connect();
+    fastify.log.info('Conectado ao banco de dados PostgreSQL com sucesso!');
+  } catch (error) {
+    fastify.log.error('Erro ao conectar ao banco de dados:', error);
+    process.exit(1); // Encerra a aplicação se não conseguir conectar
   }
 });
 
-// Inicializar o servidor Fastify
+// Rotas de Autenticação
+fastify.post('/register', authController.register); // Registro de novos usuários
+fastify.post('/login', authController.login); // Login de usuários
+fastify.get('/me', { preHandler: [verifyJWT] }, authController.me); // Informações do usuário autenticado
+
+// Rotas de Usuários
+fastify.put('/profile', { preHandler: [verifyJWT] }, userController.updateProfile); // Atualizar perfil do usuário
+fastify.get('/profile', { preHandler: [verifyJWT] }, userController.getProfile); // Exibir perfil do usuário
+
+// Rotas de Livros
+fastify.post('/books', { preHandler: [verifyJWT] }, bookController.create); // Adicionar novo livro
+fastify.get('/books', bookController.list); // Listar livros (com filtro de pesquisa)
+fastify.put('/books/:id', { preHandler: [verifyJWT] }, bookController.update); // Editar livro
+fastify.delete('/books/:id', { preHandler: [verifyJWT] }, bookController.remove); // Remover livro
+
+
+// Iniciar o servidor
 const start = async () => {
   try {
-    await fastify.listen({ port: process.env.PORT || 3000, host: '0.0.0.0' });
-    fastify.log.info(`Server running at http://localhost:${process.env.PORT || 3000}`);
-  } catch (err) {
-    fastify.log.error(err);
-    process.exit(1); // Sair com erro
+    const port = process.env.PORT || 3000; // Porta padrão ou porta definida nas variáveis de ambiente
+    await fastify.listen({ port, host: '0.0.0.0' });
+    fastify.log.info(`Servidor rodando na porta ${port}`);
+  } catch (error) {
+    fastify.log.error(error);
+    process.exit(1);
   }
 };
 
-start(); // Chamada para inicializar o servidor
+// Chamar a função para iniciar o servidor
+start();
