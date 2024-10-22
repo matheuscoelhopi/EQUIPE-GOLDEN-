@@ -12,4 +12,4 @@ const bookController = {
       reply.status(500).send({ error: 'Erro ao criar o livro.' });
     }
   },
-};
+};  

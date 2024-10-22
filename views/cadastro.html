@@ -15,15 +15,15 @@
         <div class="container main">
             <div class="row">
                 <div class="col-md-6 right">
-                    <div class="input-box">
+                    <form class="input-box" id="formulario">
                         <header>Crie sua conta:</header>
                         <div class="input-field">
                             <input type="text" class="input" id="name" required autocomplete="off">
                             <label for="name">Nome</label>
                         </div>
                         <div class="input-field">
-                            <input type="text" class="input" id="sobrenome" required autocomplete="off">
-                            <label for="sobrenome">Sobrenome</label>
+                            <input type="tel" class="input" id="phone" required autocomplete="off">
+                            <label for="phone">Telefone</label>
                         </div>
                         <div class="input-field">
                             <input type="email" class="input" id="email" required autocomplete="off">
@@ -34,12 +34,56 @@
                             <label for="pass">Senha</label>
                         </div>
                         <div class="input-field">
+                            <input type="password" class="input" id="confirmPassword" required>
+                            <label for="confirmPassword">Confirmar Senha</label>
+                        </div>
+                        <div class="input-field">
                             <input type="submit" class="submit" value="Cadastro">
                         </div>
+                        <script>
+                            const form = document.getElementById('formulario');
+                            
+                            form.addEventListener('submit', async (e) => {
+                              e.preventDefault();
+                              
+                              // Recebe input
+                              const userData = {
+                                name: document.getElementById('name').value,
+                                phone: document.getElementById('phone').value,
+                                password: document.getElementById('pass').value,
+                                confirmPassword: document.getElementById('confirmPassword').value,
+                              };
+                              
+                              // Envia os dados
+                              try {
+                                const response = await fetch('http://localhost:3000/register', {
+                                  method: 'POST',
+                                  headers: {
+                                    'Content-Type': 'application/json',
+                                  },
+                                  body: JSON.stringify(userData),
+                                });
+                                
+                                if (!response.ok) {
+                                        throw new Error('Erro no cadastro');
+                                    }
+
+                                    const result = await response.json();
+                                    console.log('Usuário cadastrado com sucesso:', result);
+
+                                    // Redireciona para a página de sucesso após cadastro 
+                                    window.location.href = '';
+                                    } catch (error) {
+                                    console.error(error.message);
+                                    alert('Erro ao cadastrar usuário');
+                                    }
+                              
+                            });
+                          </script>
                         <div class="signin">
                             <span>Já tem uma conta? <a href="login.html">Login</a></span>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
