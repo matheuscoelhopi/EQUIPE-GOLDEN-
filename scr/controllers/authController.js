@@ -5,7 +5,11 @@ import pool from '../database.js';
 const authController = {
   // Registro de novos usuários
   register: async (req, reply) => {
-    const { name, phone, password, confirmPassword, termsAccepted } = req.body;
+    const { name, phone, password, confirmPassword } = req.body;
+
+    if (!name || !phone || !password || !confirmPassword) {
+      return reply.status(400).send({ error: 'Todos os campos são obrigatórios.' });
+    }
 
     if (password !== confirmPassword) {
       return reply.status(400).send({ error: 'As senhas não coincidem.' });
@@ -15,13 +19,13 @@ const authController = {
 
     try {
       const result = await pool.query(
-        'INSERT INTO users (name, phone, password) VALUES ($1, $2, $3) RETURNING *',
+        'INSERT INTO users ("name", "phone", "password") VALUES ($1, $2, $3) RETURNING *',
         [name, phone, hashedPassword]
       );
       const user = result.rows[0];
       reply.status(201).send({ message: 'Usuário registrado com sucesso!', user });
     } catch (error) {
-      reply.status(500).send({ error: 'Erro ao registrar o usuário.' });
+      console.error('Erro ao registrar usuário:', error);
     }
   },
 

@@ -1,5 +1,6 @@
 import pool from '../database.js';
 import bcrypt from 'bcrypt';
+import sql from '../database.js'
 
 const userController = {
   // Atualizar informações do perfil do usuário

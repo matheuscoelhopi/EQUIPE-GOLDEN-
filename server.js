@@ -17,9 +17,9 @@ const fastify = Fastify({ logger: true });
 fastify.register(fastifyMultipart);
 
 // Registrar o plugin JWT para autenticação
-fastify.register(fastifyJwt, {
+/*fastify.register(fastifyJwt, {
   secret: process.env.JWT_SECRET, // A chave secreta usada para assinar tokens JWT
-});
+});*/
 
 // Conectar ao banco de dados antes de iniciar o servidor
 fastify.addHook('onReady', async () => {

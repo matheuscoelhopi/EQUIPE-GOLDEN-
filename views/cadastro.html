@@ -15,7 +15,7 @@
         <div class="container main">
             <div class="row">
                 <div class="col-md-6 right">
-                    <form class="input-box" id="formulario">
+                    <form method="post" action="http://localhost:3000/register" class="input-box" id="formulario">
                         <header>Crie sua conta:</header>
                         <div class="input-field">
                             <input type="text" class="input" id="name" required autocomplete="off">
@@ -72,10 +72,10 @@
                                     console.log('Usuário cadastrado com sucesso:', result);
 
                                     // Redireciona para a página de sucesso após cadastro 
-                                    window.location.href = '';
+                                    window.location.href = './models/livros.html';
                                     } catch (error) {
                                     console.error(error.message);
-                                    alert('Erro ao cadastrar usuário');
+                                    alert(error);
                                     }
                               
                             });
