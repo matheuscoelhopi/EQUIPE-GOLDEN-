@@ -1,0 +1,70 @@
+.carousel {
+    background-color: rgb(216, 217, 218);
+    height: 800px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.cards-wrapper {
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.card {
+    margin: 0 5em;
+    box-shadow: 2px 6px 8px 0 rgba(6, 6, 6, 0.18);
+    border: none;
+    border-radius: 0;
+}
+
+.carousel-inner {
+    padding: 1em;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: #ffffff;
+    width: 80px; 
+    height: 80px; 
+    border-radius: 50%; 
+    top: 50%; 
+    transform: translateY(-50%);
+    z-index: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-control-prev {
+    left: -80px;
+    margin-top: 6rem;
+}
+
+.carousel-control-next {
+    right: -80px; 
+    margin-top: 6rem;
+}
+
+.textCarrossel {
+    padding-top: 5rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-size: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .card img {
+        height: 11em;
+    }
+}
