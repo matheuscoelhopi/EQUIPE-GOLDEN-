@@ -5,9 +5,9 @@ import pool from '../database.js';
 const authController = {
   // Registro de novos usuários
   register: async (req, reply) => {
-    const { name, phone, password, confirmPassword } = req.body;
+    const { name, email, phone, password, confirmPassword } = req.body;
 
-    if (!name || !phone || !password || !confirmPassword) {
+    if (!name || !email || !phone || !password || !confirmPassword) {
       return reply.status(400).send({ error: 'Todos os campos são obrigatórios.' });
     }
 
@@ -19,8 +19,8 @@ const authController = {
 
     try {
       const result = await pool.query(
-        'INSERT INTO users ("name", "phone", "password") VALUES ($1, $2, $3) RETURNING *',
-        [name, phone, hashedPassword]
+        'INSERT INTO users ("name", "email", "phone", "password") VALUES ($1, $2, $3, $4) RETURNING *',
+        [name, email, phone, hashedPassword]
       );
       const user = result.rows[0];
       reply.status(201).send({ message: 'Usuário registrado com sucesso!', user });
@@ -31,10 +31,10 @@ const authController = {
 
   // Login de usuários
   login: async (req, reply) => {
-    const { phone, password } = req.body;
+    const { email, password } = req.body;
 
     try {
-      const result = await pool.query('SELECT * FROM users WHERE phone = $1', [phone]);
+      const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
       const user = result.rows[0];
 
       if (!user) {
@@ -46,7 +46,7 @@ const authController = {
         return reply.status(400).send({ error: 'Senha incorreta.' });
       }
 
-      const token = jwt.sign({ id: user.id, phone: user.phone }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
         expiresIn: '1d',
       });
 

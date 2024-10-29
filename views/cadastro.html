@@ -15,7 +15,7 @@
         <div class="container main">
             <div class="row">
                 <div class="col-md-6 right">
-                    <form method="post" action="http://localhost:3000/register" class="input-box" id="formulario">
+                    <form class="input-box" id="formulario">
                         <header>Crie sua conta:</header>
                         <div class="input-field">
                             <input type="text" class="input" id="name" required autocomplete="off">
@@ -25,10 +25,7 @@
                             <input type="tel" class="input" id="phone" required autocomplete="off">
                             <label for="phone">Telefone</label>
                         </div>
-                        <div class="input-field">
-                            <input type="email" class="input" id="email" required autocomplete="off">
-                            <label for="email">Email</label>
-                        </div>
+
                         <div class="input-field">
                             <input type="password" class="input" id="pass" required>
                             <label for="pass">Senha</label>
@@ -75,7 +72,7 @@
                                     window.location.href = './models/livros.html';
                                     } catch (error) {
                                     console.error(error.message);
-                                    alert(error);
+                                    alert('Erro ao cadastrar usuário');
                                     }
                               
                             });
