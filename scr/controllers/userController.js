@@ -6,7 +6,7 @@ const userController = {
   // Atualizar informações do perfil do usuário
   updateProfile: async (req, reply) => {
     const { id: userId } = req.user;
-    const { name, phone, password } = req.body;
+    const { name,email, phone, password } = req.body;
 
     try {
       // Atualiza apenas se os dados forem enviados
@@ -16,6 +16,11 @@ const userController = {
       if (name) {
         updates.push('name = $' + (params.length + 1));
         params.push(name);
+      }
+
+      if (email) {
+        updates.push('name = $' + (params.length + 1));
+        params.push(email);
       }
 
       if (phone) {
@@ -32,7 +37,7 @@ const userController = {
       params.push(userId); // O último parâmetro será o ID do usuário
 
       if (updates.length > 0) {
-        const query = `UPDATE users SET ${updates.join(', ')} WHERE id = $${params.length} RETURNING id, name, phone`;
+        const query = `UPDATE users SET ${updates.join(', ')} WHERE id = $${params.length} RETURNING id, name, email , phone`;
         const result = await pool.query(query, params);
         const updatedUser = result.rows[0];
         reply.send({ message: 'Perfil atualizado com sucesso!', user: updatedUser });

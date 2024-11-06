@@ -11,7 +11,7 @@ const { Pool } = pg;
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL, // URL completa do banco de dados PostgreSQL
   ssl: {
-    rejectUnauthorized: false, // Configura SSL (útil para ambientes de produção como Neon.tech)
+    rejectUnauthorized: false, // Configura SSL
   },
 });
 
