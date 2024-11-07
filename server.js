@@ -1,7 +1,7 @@
 import Fastify from 'fastify'; // Framework de servidor
 import dotenv from 'dotenv'; // Carregar variáveis de ambiente
 import fastifyJwt from 'fastify-jwt'; // Plugin para autenticação JWT
-import fastifyMultipart from 'fastify-multipart'; // Plugin para upload de arquivos (se necessário)
+import fastifyMultipart from 'fastify-multipart'; // Plugin para upload de arquivos
 import authController from './scr/controllers/authController.js'; // Controlador de autenticação
 import bookController from './scr/controllers/bookController.js'; // Controlador de livros
 import userController from './scr/controllers/userController.js'; // Controlador de usuários (adicionado)
@@ -30,7 +30,7 @@ fastify.addHook('onReady', async () => {
     fastify.log.info('Conectado ao banco de dados PostgreSQL com sucesso!');
   } catch (error) {
     fastify.log.error('Erro ao conectar ao banco de dados:', error);
-    process.exit(1); // Encerra a aplicação se não conseguir conectar
+    process.exit(1);
   }
 });
 
@@ -66,7 +66,7 @@ fastify.delete('/exchanges/:id/cancel', { preHandler: [verifyJWT] }, exchangesCo
 // Iniciar o servidor
 const start = async () => {
   try {
-    const port = process.env.PORT || 3000; // Porta padrão ou porta definida nas variáveis de ambiente
+    const port = process.env.PORT || 3000;
     await fastify.listen({ port, host: '0.0.0.0' });
     fastify.log.info(`Servidor rodando na porta ${port}`);
   } catch (error) {
@@ -75,5 +75,4 @@ const start = async () => {
   }
 };
 
-// Chamar a função para iniciar o servidor
 start();
